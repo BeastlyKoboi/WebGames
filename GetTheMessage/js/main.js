@@ -1,5 +1,6 @@
 
 let words;
+let descriptions;
 let inputNodesMap = new Map();
 
 // Turns key inputs to Uppercase Letter
@@ -19,6 +20,36 @@ const ReplaceLetter = (e) => {
     e.target.value = "";
 }
 
+// Creates a single input for a given letter
+// Adds it to nodeMap and gives it traits and behavior
+const CreateInputForLetter = (letter) => {
+    // Create new input for this letter
+    let currentInputToAdd = document.createElement('input');
+
+    // Specifies input characteristics
+    currentInputToAdd.type = 'text';
+    currentInputToAdd.className = letter;
+    currentInputToAdd.value = `${letter}`;
+    currentInputToAdd.maxLength = 1;
+    currentInputToAdd.placeholder = '?';
+
+    // adds validation and letter replacement functions
+    currentInputToAdd.addEventListener('keyup', Validate);
+    currentInputToAdd.addEventListener('keydown', ReplaceLetter);
+
+    // If letter key exists, add new input into array
+    if (inputNodesMap.has(letter)) {
+        inputNodesMap.get(letter).push(currentInputToAdd);
+    }
+    // If not, create letter key and add new input into array
+    else{
+        inputNodesMap.set(letter, []);
+        inputNodesMap.get(letter).push(currentInputToAdd);
+    }
+
+    return currentInputToAdd;
+}
+
 // Creates the specific inputs for the given quote, letter by letter
 const CreateInputsForQuote = (quote) => {
 
@@ -35,28 +66,7 @@ const CreateInputsForQuote = (quote) => {
         // if char is a letter, create input
         if (quote[i] != ' ') {
             // Create new input for this letter
-            let currentInputToAdd = document.createElement('input');
-
-            // Specifies input characteristics
-            currentInputToAdd.type = 'text';
-            currentInputToAdd.className = quote[i];
-            currentInputToAdd.value = `${quote[i]}`;
-            currentInputToAdd.maxLength = 1;
-            currentInputToAdd.placeholder = '?';
-
-            // adds validation and letter replacement functions
-            currentInputToAdd.addEventListener('keyup', Validate);
-            currentInputToAdd.addEventListener('keydown', ReplaceLetter);
-
-            // If letter key exists, add new input into array
-            if (inputNodesMap.has(quote[i])) {
-                inputNodesMap.get(quote[i]).push(currentInputToAdd);
-            }
-            // If not, create letter key and add new input into array
-            else{
-                inputNodesMap.set(quote[i], []);
-                inputNodesMap.get(quote[i]).push(currentInputToAdd);
-            }
+            let currentInputToAdd = CreateInputForLetter(quote[i]);
 
             // adds new input into current div
             currentDiv.appendChild(currentInputToAdd);
@@ -75,26 +85,33 @@ const CreateInputsForQuote = (quote) => {
     resultsDiv.appendChild(currentDiv);
 };
 
-/* Old Version
-function createInputsForQuote(quote){
-    document.createElement('input');
+// Creates the specific inputs for the clue words, letter by letter
+const CreateInputsForClues = () => {
 
-    let addedInputs = "" + "<div>";
+    // Holds the results div and the inner div being filled
+    let cluesDiv = document.querySelector('#clue-inputs');
+    let currentDiv = document.createElement('div');
 
-    for (let i = 0; i < quote.length; i++) {
-        if (quote[i] != " ") {
-            addedInputs += `<input type="text" class="${quote[i]}" maxlength="1" value="${quote[i]}" placeholder="?" onkeyup="validate(this);" onkeydown="replaceLetter(this);" ></input>`;
+    // clear clues
+    cluesDiv.innerHTML = "";
+
+    for (let word = 0; word < words.length; word++) {
+        for (let letter = 0; letter < words[word].length; letter++) {
+            let currentInputToAdd = CreateInputForLetter(words[word][letter]);
+
+            currentDiv.appendChild(currentInputToAdd);
         }
-        else{
-            addedInputs += `</div><div>`;
-        }
+        // 
+        let clueDesc = document.createElement('div');
+        clueDesc.innerHTML = descriptions[word];
+        currentDiv.appendChild(clueDesc);
+
+        cluesDiv.appendChild(currentDiv);
+
+        currentDiv = document.createElement('div');
     }
 
-    addedInputs += `</div>`;
-
-    document.querySelector('#results').innerHTML = addedInputs;
 }
-*/
 
 // Function to load a given level from a text file. 
 function LoadLevel(levelNum = 1) {
@@ -103,13 +120,15 @@ function LoadLevel(levelNum = 1) {
     fetch(`text/level${levelNum}.txt`)
         .then(response => response.text())
         .then(textString => {
-            let levelInfo = textString.split(".");
+            let levelInfo = textString.split("|");
             quote = levelInfo[0];
             words = levelInfo[1].split(",");
-
+            descriptions = levelInfo[2].split(".");
 
 
             CreateInputsForQuote(quote)
+            CreateInputsForClues();
+
 
             console.log(words);
         });
