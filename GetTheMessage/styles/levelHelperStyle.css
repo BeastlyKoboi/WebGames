@@ -1,0 +1,27 @@
+/*
+    Menu Styles
+*/
+
+input {
+    font-size: 24pt;
+    max-width: 24pt;
+    text-align: center;
+    
+}
+
+#given-quote {
+    font-size: 24pt;
+    max-width: 1000pt;
+    min-width: 400pt;
+    text-align: center;
+}
+
+#results {
+    margin: 0 auto;
+    width: 80%;
+}
+
+#results div {
+    display: inline;
+    margin: 20px;
+}

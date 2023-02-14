@@ -1,0 +1,23 @@
+/*
+    Menu Styles
+*/
+
+
+input {
+    font-size: 24pt;
+    max-width: 24pt;
+    text-align: center;
+    
+}
+
+#quote-inputs {
+    margin: 0 auto;
+    width: 80%;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+#quote-inputs div {
+    display: inline;
+    margin: 10px 20px;
+}
