@@ -4,36 +4,71 @@ let descriptions;
 let inputNodesMap = new Map();
 let allInputs;
 
+
 // Replace specific input value to default 
 // for use when clearing input onkeydown
 const ReplaceLetter = (e) => {
-    if (e.repeat) return;
-    console.log(e);
 
-    e.target.value = e.key;
-
-    e.target.value = e.target.value.replace(/\W|\d/g, '').toUpperCase();
+    // Saves array of all same letter inputs for later
     let inputNodeArray = inputNodesMap.get(e.target.className);
-    console.log(e.target.value);
+
+    // Keeps key from being inserted after this method
+    e.preventDefault();
+    
+    // Deletes key from all connected inputs
+    // and focuses on previous input
+    if (e.key == 'Backspace') {
+        // Delete input values
+        inputNodeArray.forEach(element => {
+            element.value = '';
+        });
+
+        // Moves focus to previous index
+        for (let index = 0; index < allInputs.length; index++) {
+            if (allInputs[index] == e.target) {
+                let prevInput = allInputs[index - 1];
+
+                if (prevInput && (prevInput.value == ',' || prevInput.value == '.')) {
+                    prevInput = allInputs[index - 2];
+                }
+
+                if (prevInput) 
+                    prevInput.focus();
+
+                break;
+            }
+        }
+    }
+
+    // Prevents repeat keys and non-char keys
+    if (e.repeat || e.key.length != 1) return;
+
+    console.log(e);
+    console.log(e.key);
+
+    // Changes input value to validated key input
+    e.target.value = e.key.replace(/\W|\d/g, '').toUpperCase();
+    
+    // Changes all connected input to new target value
     inputNodeArray.forEach(element => {
         element.value = e.target.value;
     });
 
+    // If new value matches correct answer, 
+    // Change background to make it appear as correct
     if (e.target.value == e.target.className) {
         inputNodeArray.forEach(element => {
             element.style.backgroundColor = 'greenyellow';
         });
     }
 
+    // Only if current focused input has a value, 
+    // does it focus to the next input
     if (e.target.value.length == 1) {
-        let nextInput = e.target;
-        nextInput;
 
-        let index;
-
-        for (index = 0; index < allInputs.length; index++) {
+        for (let index = 0; index < allInputs.length; index++) {
             if (allInputs[index] == e.target) {
-                nextInput = allInputs[index + 1];
+                let nextInput = allInputs[index + 1];
 
                 if (nextInput && (nextInput.value == ',' || nextInput.value == '.')) {
                     nextInput = allInputs[index + 2];
@@ -45,8 +80,6 @@ const ReplaceLetter = (e) => {
                 break;
             }
         }
-
-
     }
 }
 
@@ -64,7 +97,7 @@ const CreateInputForLetter = (letter) => {
     currentInputToAdd.placeholder = '?';
 
     // adds validation and letter replacement functions
-    currentInputToAdd.addEventListener('keypress', ReplaceLetter);
+    currentInputToAdd.addEventListener('keydown', ReplaceLetter);
 
     // If letter key exists, add new input into array
     if (inputNodesMap.has(letter)) {
