@@ -2,23 +2,63 @@
     Menu Styles
 */
 
+body {
+    background-color: green;
+}
 
 input {
     font-size: 24pt;
     max-width: 24pt;
     text-align: center;
-    
+    border-radius: .5rem;
+}
+
+.punctuation {
+    border-style: hidden;   
+    background-color: transparent;
 }
 
 #quote-inputs {
     margin: 0 auto;
-    width: 80%;
+    width: 85%;
     display: flex;
     flex-flow: row wrap;
 }
 
 #quote-inputs div {
     display: inline;
-    margin: 10px 20px;
+    margin: 5px 20px;
 }
+
+#clues {
+    display: grid;
+
+    /* grid-template-columns: 1fr 1fr;  */
+    margin: 0 auto;
+    width:80%;
+}
+
+#clues .clue {
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+
+    grid-template-areas: "clueInput clueDesc";
+
+    margin: 0rem 1rem;
+}
+
+.clue-inputs { grid-area: clueInput }
+.clue-desc { grid-area: clueDesc }
+
+.clue-inputs {
+    text-align: left;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.clue-desc {
+    font-size: larger;
+    text-align: right;
+}
+
 
