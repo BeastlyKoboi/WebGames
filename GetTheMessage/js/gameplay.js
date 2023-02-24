@@ -3,6 +3,8 @@ let words;
 let descriptions;
 let inputNodesMap = new Map();
 let allInputs;
+let numLetters = 0;
+let LetterToNumMap = new Map();
 
 
 // Replace specific input value to default 
@@ -88,26 +90,28 @@ const ReplaceLetter = (e) => {
 const CreateInputForLetter = (letter) => {
     // Create new input for this letter
     let currentInputToAdd = document.createElement('input');
+    let placeHolderVal = '?';
 
     // Specifies input characteristics
     currentInputToAdd.type = 'text';
     currentInputToAdd.className = letter;
     //currentInputToAdd.value = `${letter}`;
     currentInputToAdd.maxLength = 1;
-    currentInputToAdd.placeholder = '?';
+    //currentInputToAdd.placeholder = '?';
 
     // adds validation and letter replacement functions
     currentInputToAdd.addEventListener('keydown', ReplaceLetter);
 
     // If letter key exists, add new input into array
-    if (inputNodesMap.has(letter)) {
-        inputNodesMap.get(letter).push(currentInputToAdd);
-    }
-    // If not, create letter key and add new input into array
-    else{
+    if (!inputNodesMap.has(letter)) {
         inputNodesMap.set(letter, []);
-        inputNodesMap.get(letter).push(currentInputToAdd);
+        
+        numLetters++;
+        LetterToNumMap.set(letter, numLetters);
     }
+
+    inputNodesMap.get(letter).push(currentInputToAdd);
+    currentInputToAdd.placeholder = LetterToNumMap.get(letter)
 
     return currentInputToAdd;
 }
@@ -231,6 +235,8 @@ function LoadLevel(levelNum = 1) {
 }
 
 window.onload = () => {
+
+    LoadLevel(location.search.substring(1));
 
     // 
     document.querySelector("#submitButton").onclick = () => {

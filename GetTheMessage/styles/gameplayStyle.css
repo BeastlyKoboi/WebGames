@@ -12,6 +12,9 @@ input {
     text-align: center;
     border-radius: .5rem;
 }
+input::placeholder {
+    font-size: 20pt;
+}
 
 .punctuation {
     border-style: hidden;   
@@ -42,7 +45,7 @@ input {
     display: grid; 
     grid-template-columns: 1fr 1fr; 
 
-    grid-template-areas: "clueInput clueDesc";
+    grid-template-areas: "clueDesc clueInput";
 
     margin: 0rem 1rem;
 }
@@ -51,14 +54,15 @@ input {
 .clue-desc { grid-area: clueDesc }
 
 .clue-inputs {
-    text-align: left;
+    text-align: right;
+    
     display: flex;
     flex-flow: row nowrap;
 }
 
 .clue-desc {
     font-size: larger;
-    text-align: right;
+    text-align: left;
 }
 
 

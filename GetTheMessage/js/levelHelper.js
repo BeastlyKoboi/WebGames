@@ -44,12 +44,9 @@ const FindWordsInQuote = () => {
         }
 
         if (wordPasses) {
-            console.log(element);
             passedWords.push(element);
         }
     });
-
-    resultsDiv.innerHTML = passedWords.toString() + "\n" + lettersInQuote;
 
     FindWordsWithAllLetters();
 }
@@ -61,14 +58,23 @@ const FindWordsWithAllLetters = () => {
 
     for (let i = 0; i < passedWords.length; i++) {
 
+        let hasRemovedLetter = false;
+        let removedLetters = '';
+
         for (let j = 0; j < passedWords[i].length; j++) {
             if (lettersLeft.includes(passedWords[i][j])) {
                 lettersLeft = lettersLeft.replace(passedWords[i][j], '');
                 console.log(passedWords[i][j] + " " + lettersLeft);
+                hasRemovedLetter = true;
+                removedLetters += passedWords[i][j];
             }
         }
 
-        allLettersGroup.push(passedWords[i]);
+        if (hasRemovedLetter) {
+            console.log(passedWords[i] + " includes new " + removedLetters);
+            allLettersGroup.push(passedWords[i]);
+        }
+        
 
         if (lettersLeft == '') {
             break;
@@ -76,13 +82,15 @@ const FindWordsWithAllLetters = () => {
     }
 
     if (lettersLeft == '') {
+        console.log("All words included");
         console.log(allLettersGroup);
     }
     else {
-        console.log("All word included. Letters Left is " + lettersLeft);
+        console.log("Letters Left is " + lettersLeft);
         console.log(allLettersGroup);
     }
 
+    document.querySelector('#results').innerHTML = allLettersGroup.toString() + "\n" + lettersInQuote;
 }
 
 window.onload = () => {
