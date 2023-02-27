@@ -237,7 +237,7 @@ function LoadLevel(levelNum = 1) {
 window.onload = () => {
     
     if (location.search.substring(1)) {
-        LoadLevel(loaction.search.substring(1));    
+        LoadLevel(location.search.substring(1));    
     }
     else {
         LoadLevel();
