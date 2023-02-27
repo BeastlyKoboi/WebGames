@@ -1,0 +1,44 @@
+
+body {
+    width: 80%;
+    margin: 0 auto;
+    background-color: green;
+}
+
+header {
+    margin: 0 auto;
+}
+
+h1 {
+    margin: 0 auto;
+    text-align: center;
+}
+
+ul {
+    /* width: 100%; */
+    list-style-type: none;
+    /* display: flex;
+    justify-content: space-around; */
+    text-decoration: none;
+}   
+
+li {
+    display: inline-block;
+    margin: 3rem 1rem;
+    transition: transform 0.25s ease-out;
+}
+
+li a {
+    padding: 2rem;
+    background-color: greenyellow;
+    border-radius: 1rem;
+    /* border-color: purple;
+    border-width: 1rem; */
+    border: 5px solid darkolivegreen;
+    text-decoration: none;
+    font-size: x-large;
+}
+
+li:hover {
+    transform: scale(1.5);
+}

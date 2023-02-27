@@ -152,7 +152,7 @@ const CreateInputsForQuote = (quote) => {
             currentDiv = document.createElement('div');
         }
         // if char is a letter, create input
-        else if (quote[i] == ',' || quote[i] == '.') {
+        else if (quote[i] == ',' || quote[i] == '.' || quote[i] == '\'') {
             // Create new puncuation for this letter
             let currentPunctuationToAdd = CreateInputForPunctuation(quote[i]);
 
@@ -220,7 +220,7 @@ function LoadLevel(levelNum = 1) {
         .then(response => response.text())
         .then(textString => {
             let levelInfo = textString.split("|");
-            quote = levelInfo[0];
+            quote = levelInfo[0].toUpperCase();
             words = levelInfo[1].split(",");
             descriptions = levelInfo[2].split(".");
 
@@ -237,10 +237,5 @@ function LoadLevel(levelNum = 1) {
 window.onload = () => {
 
     LoadLevel(location.search.substring(1));
-
-    // 
-    document.querySelector("#submitButton").onclick = () => {
-        LoadLevel();
-    };
 
 }

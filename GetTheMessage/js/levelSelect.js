@@ -1,4 +1,4 @@
-let numLevels = 4;
+let numLevels = 7;
 
 window.onload = () => {
 

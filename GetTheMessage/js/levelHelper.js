@@ -53,7 +53,7 @@ const FindWordsInQuote = () => {
 
 //
 const FindWordsWithAllLetters = () => {
-    let lettersLeft = lettersInQuote.slice().toLowerCase().replace(',', '').replace('.', '');
+    let lettersLeft = lettersInQuote.slice().toLowerCase().replace(',', '').replace('.', '').replace('\'', '');
     let allLettersGroup = [];
 
     for (let i = 0; i < passedWords.length; i++) {
@@ -90,7 +90,7 @@ const FindWordsWithAllLetters = () => {
         console.log(allLettersGroup);
     }
 
-    document.querySelector('#results').innerHTML = allLettersGroup.toString() + "\n" + lettersInQuote;
+    document.querySelector('#results').innerHTML = allLettersGroup.toString().toUpperCase() + "\n" + lettersInQuote;
 }
 
 window.onload = () => {
