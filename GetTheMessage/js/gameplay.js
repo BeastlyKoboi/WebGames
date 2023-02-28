@@ -217,7 +217,7 @@ const CreateInputsForClues = () => {
 function LoadLevel(levelNum = 1) {
     let quote = "";
     
-    fetch(`text/level${levelNum}.txt`)
+    fetch(`text/History/level${levelNum}.txt`)
         .then(response => response.text())
         .then(textString => {
             let levelInfo = textString.split("|");
