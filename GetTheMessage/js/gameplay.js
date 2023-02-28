@@ -181,6 +181,7 @@ const CreateInputsForClues = () => {
     let cluesDiv = document.querySelector('#clues');
     let currentDiv = document.createElement('div');
 
+
     // clear clues
     cluesDiv.innerHTML = "";
 
@@ -241,8 +242,5 @@ window.onload = () => {
     }
     else {
         LoadLevel();
-    } 
-     
-    
-
+    }      
 }
