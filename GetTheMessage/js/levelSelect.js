@@ -2,7 +2,7 @@ let numLevels = 7;
 
 window.onload = () => {
 
-    let levelsDiv = document.querySelector('#levels');
+    let levelsDiv = document.querySelector('#historical-levels');
 
     let list = document.createElement('ul');
 
