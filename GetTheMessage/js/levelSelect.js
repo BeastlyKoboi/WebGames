@@ -1,4 +1,11 @@
-let numLevels = 7;
+let numLevels = 8;
+
+const WriteLevelToLocalStorage = (e) => {
+    console.log('Was Clicked.');
+
+    sessionStorage.setItem('levelNum', e.target.innerText);
+}
+
 
 window.onload = () => {
 
@@ -10,8 +17,11 @@ window.onload = () => {
         let link = document.createElement('a');
         link.href = 'gameplay.html?' + index;
         link.innerHTML = index; 
+        
 
         let item = document.createElement('li');
+        item.addEventListener('click', WriteLevelToLocalStorage);
+        item.value = index;
 
         item.appendChild(link);
 

@@ -15,21 +15,29 @@ h1 {
     text-align: center;
     display: flex;
     flex-flow: column;
+    margin: 4rem 0;
 }
 
-button {
+.menu-buttons {
     font-family: 'Courier New', Courier, monospace;
     margin: 1rem auto;
     width: 10rem;
     height: 6rem;
-    background-color: greenyellow;
-    border-radius: 1rem;
-    border: 5px solid darkolivegreen;
-    text-decoration: none;
-    font-size: x-large;
+    display: inline-block;
     transition: transform 0.25s ease-out;
 }
 
-button:hover {
+.menu-buttons a {
+    padding: 2rem;
+    background-color: greenyellow;
+    border-radius: 1rem;
+    /* border-color: purple;
+    border-width: 1rem; */
+    border: 5px solid darkolivegreen;
+    text-decoration: none;
+    font-size: x-large;
+}
+
+.menu-buttons:hover {
     transform: scale(1.5);
 }

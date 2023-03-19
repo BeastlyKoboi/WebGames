@@ -133,7 +133,7 @@ const CreateInputForPunctuation = (letter) => {
 }
 
 // Creates the specific inputs for the given quote, letter by letter
-const CreateInputsForQuote = (quote) => {
+const CreateInputsForQuote = (quote, quoteSource) => {
 
     // Holds the results div and the inner div being filled
     let resultsDiv = document.querySelector('#quote-inputs');
@@ -172,6 +172,11 @@ const CreateInputsForQuote = (quote) => {
 
     // Adds final div
     resultsDiv.appendChild(currentDiv);
+
+    // Adds source of quote
+    let sourceNode = document.createElement('p');
+    sourceNode.innerHTML = quoteSource;
+    resultsDiv.appendChild(sourceNode);
 };
 
 // Creates the specific inputs for the clue words, letter by letter
@@ -222,11 +227,12 @@ function LoadLevel(levelNum = 1) {
         .then(textString => {
             let levelInfo = textString.split("|");
             quote = levelInfo[0].toUpperCase();
-            words = levelInfo[1].split(",");
-            descriptions = levelInfo[2].split(".");
+            let quoteSource = levelInfo[1];
+            words = levelInfo[2].split(",");
+            descriptions = levelInfo[3].split(".");
 
 
-            CreateInputsForQuote(quote)
+            CreateInputsForQuote(quote, quoteSource)
             CreateInputsForClues();
 
             allInputs = document.querySelectorAll('input');
@@ -237,7 +243,10 @@ function LoadLevel(levelNum = 1) {
 
 window.onload = () => {
     
-    if (location.search.substring(1)) {
+    if (sessionStorage.getItem('levelNum')){
+        LoadLevel(sessionStorage.getItem('levelNum'));
+    }
+    else if (location.search.substring(1)) {
         LoadLevel(location.search.substring(1));    
     }
     else {
