@@ -1,4 +1,4 @@
-let numLevels = 8;
+let numLevels = 10;
 
 const WriteLevelToLocalStorage = (e) => {
     console.log('Was Clicked.');

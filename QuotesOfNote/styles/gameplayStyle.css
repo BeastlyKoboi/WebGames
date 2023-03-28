@@ -3,7 +3,18 @@
 */
 
 body {
-    background-color: green;
+    background-color: #9DC08B;
+    margin: 0 auto
+}
+
+#navbar {
+    background-color: #609966;
+    top: 0px;
+    position: sticky;
+}
+
+h2 {
+    margin-top: 0;
 }
 
 input {

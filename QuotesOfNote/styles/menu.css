@@ -1,7 +1,16 @@
+header {
+    background-color: #609966;
+}
+
 body {
-    width: 80%;
     margin: 0 auto;
-    background-color: green;
+    background-color: #9DC08B;
+}
+
+#wrapper {
+    display: flex;
+    flex-flow: column;
+    justify-content:space-evenly;
 }
 
 h1 {
@@ -11,23 +20,34 @@ h1 {
     font-family: 'Courier New', Courier, monospace;
 }
 
-#buttons {
-    text-align: center;
-    display: flex;
-    flex-flow: column;
-    margin: 4rem 0;
+h2 {
+    margin-top: 0;
 }
 
-.menu-buttons {
+p {
+    width: 30vw;
+    margin: 0 auto;
+    text-align: center;
+    font-size: larger;
+}
+
+#buttons-div {
+    text-align: center;
+    display: flex;
+    flex-flow: row wrap;
+    margin: 4rem auto;
+    width: 70%;
+}
+
+.big-button {
     font-family: 'Courier New', Courier, monospace;
-    margin: 1rem auto;
+    margin: auto;
     width: 10rem;
-    height: 6rem;
     display: inline-block;
     transition: transform 0.25s ease-out;
 }
 
-.menu-buttons a {
+.big-button a {
     padding: 2rem;
     background-color: greenyellow;
     border-radius: 1rem;
@@ -38,6 +58,6 @@ h1 {
     font-size: x-large;
 }
 
-.menu-buttons:hover {
+.big-button:hover {
     transform: scale(1.5);
 }
