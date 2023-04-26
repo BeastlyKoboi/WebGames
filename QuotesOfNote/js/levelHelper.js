@@ -55,7 +55,7 @@ const FindWordsInQuote = () => {
 const FindWordsWithAllLetters = () => {
     let lettersLeft = lettersInQuote.slice().toLowerCase().replace(',', '').replace('.', '').replace('\'', '');
     let allLettersGroup = [];
-
+    
     for (let i = 0; i < passedWords.length; i++) {
 
         let hasRemovedLetter = false;
